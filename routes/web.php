@@ -6,6 +6,7 @@ use App\Http\Controllers\ContestantController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DanceController;
 use App\Http\Controllers\CriteriaController;
+use App\Http\Controllers\ScoreController;
 use App\Http\Controllers\UnauthorizedController;
 use App\Http\Middleware\Admin;
 use App\Http\Middleware\User;
@@ -27,6 +28,8 @@ Route::middleware(['auth', Admin::class])->group(function ()
         Route::resource('/category', CategoryController::class);
         Route::resource('/dance', DanceController::class);
         Route::resource('/criteria', CriteriaController::class);
+        Route::resource('/score', ScoreController::class);
+        Route::get('/scores/{contestant}', [ScoreController::class, 'vote'])->name('score.vote');
     });
 });
 

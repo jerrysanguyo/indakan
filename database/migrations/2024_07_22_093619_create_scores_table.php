@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('contestant_id')->constrained('contestants');
             $table->foreignId('criteria_id')->constrained('criterias');
             $table->foreignId('scored_by')->constrained('users');
-            $table->foreignId('added_by')->constrained('users');
+            $table->integer('score');
             $table->foreignId('updated_by')->constrained('users');
             $table->timestamps();
         });
