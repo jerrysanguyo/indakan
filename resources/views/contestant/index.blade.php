@@ -31,11 +31,11 @@
                     <table class="table table-striped" id="contestant-table">
                         <thead>
                             <tr>
-                                <th>contestant name</th>
-                                <th>Fold dance category</th>
+                                <th>Contestant name</th>
+                                <th>Barangay</th>
+                                <th>Folk dance category</th>
                                 <th>Dance</th>
-                                <th>Created</th>
-                                <th>Updated</th>
+                                <th>No. of members</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -43,10 +43,10 @@
                             @foreach($getAllContestants as $contestant)
                             <tr>
                                 <td>{{ $contestant->name }}</td>
+                                <td>{{ $contestant->barangay }}</td>
                                 <td>{{ $contestant->category->name }}</td>
                                 <td>{{ $contestant->dance->name }}</td>
-                                <td>{{ $contestant->createdBy->name }}</td>
-                                <td>{{ $contestant->updatedBy->name }}</td>
+                                <td>{{ $contestant->no_of_members }}</td>
                                 <td>
                                     <div class="dropdown">
                                         <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">

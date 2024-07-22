@@ -28,12 +28,12 @@ class Contestant extends Model
 
     public function category() 
     {
-        return $this->belongsTo(Category::class, 'added_by');
+        return $this->belongsTo(Category::class, 'folk_dance_id');
     }
 
     public function dance() 
     {
-        return $this->belongsTo(Dance::class, 'added_by');
+        return $this->belongsTo(Dance::class, 'dance_id');
     }
 
     public function createdBy() 
