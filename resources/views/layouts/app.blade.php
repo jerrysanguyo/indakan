@@ -43,7 +43,7 @@
                     <ul class="navbar-nav me-auto mx-3">
                         <a href="{{ route('admin.home') }}" class="nav-link">Home</a>
                         <a href="{{ route('admin.contestant.index') }}" class="nav-link">Contestant</a>
-                        <a href="" class="nav-link">Criteria</a>
+                        <a href="{{ route('admin.criteria.index') }}" class="nav-link">Criteria</a>
                         <a href="{{ route('admin.dance.index') }}" class="nav-link">Dance</a>
                         <a href="{{ route('admin.category.index') }}" class="nav-link">Category</a>
                     </ul>
