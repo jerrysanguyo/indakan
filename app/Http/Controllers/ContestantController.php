@@ -3,61 +3,124 @@
 namespace App\Http\Controllers;
 
 use App\Models\Contestant;
+use App\Models\Category;
+use App\Models\Dance;
 use App\Http\Requests\StoreContestantRequest;
 use App\Http\Requests\UpdateContestantRequest;
+use App\DataTables\AllDataTable;
+use Illuminate\Support\Facades\Log;
 
 class ContestantController extends Controller
 {
-    public function index()
+    public function index(AllDataTable $dataTable)
     {
-        return view('contestant.index');
+        $barangays = [
+            'TUKTUKAN', 'CENTRAL_BICUTAN', 'CENTRAL_SIGNAL_VILLAGE', 'FORT_BONIFACIO', 'HAGONOY', 
+            'IBAYO-TIPAS', 'LIGID-TIPAS', 'LOWER_BICUTAN', 'MAHARLIKA_VILLAGE', 'NAPINDAN', 
+            'NEW_UPPER_BICUTAN', 'NORTH_DAANG_HARI', 'NORTH_SIGNAL_VILLAGE', 'PAG-ASA', 
+            'PAMAYANANG_DIEGO_SILANG', 'PINAGSAMA', 'SAN_MIGUEL', 'SANTA_ANA', 'SOUTH_DAANG_HARI', 
+            'SOUTH_SIGNAL_VILLAGE', 'TANYAG', 'UPPER_BICUTAN', 'WAWA', 'WESTERN_BICUTAN', 
+            'COMEMBO', 'EASTERN_BICUTAN', 'PEMEMBO', 'PITOGO', 'POST_PROPER_NORTHSIDE', 
+            'POST_PROPER_SOUTHSIDE', 'RIZAL', 'SOUTH_CEMBO', 'WEST_REMBO'
+        ];
+
+        $getAllContestants = Contestant::getAllContestants();
+        $getAllCategory = Category::getAllCategories();
+        $getAllDance = Dance::getAllDances();
+
+        return $dataTable->render('contestant.index', compact(
+            'getAllContestants',
+            'getAllCategory',
+            'getAllDance',
+            'barangays',
+        ));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreContestantRequest $request)
     {
-        //
-    }
+        $validated = $request->validated();
+        $validated['added_by'] = auth()->id();
+        $validated['updated_by'] = auth()->id();
 
-    /**
-     * Display the specified resource.
-     */
+        try 
+        {
+            Contestant::create($validated);
+
+            return redirect()->route('admin.contestant.index')
+                             ->with('success', 'contestant added successfully!');
+        } 
+        catch (\Exception $e) 
+        {
+            Log::error('Failed to store contestant', ['error' => $e->getMessage()]);
+            
+            return redirect()->route('admin.contestant.index')
+                             ->with('error', 'Failed to add contestant. Please try again.');
+        }
+    }
+    
     public function show(Contestant $contestant)
     {
-        //
+        return view('contestant.show', compact('contestant'));
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
+    
     public function edit(Contestant $contestant)
     {
-        //
-    }
+        $barangays = [
+            'TUKTUKAN', 'CENTRAL_BICUTAN', 'CENTRAL_SIGNAL_VILLAGE', 'FORT_BONIFACIO', 'HAGONOY', 
+            'IBAYO-TIPAS', 'LIGID-TIPAS', 'LOWER_BICUTAN', 'MAHARLIKA_VILLAGE', 'NAPINDAN', 
+            'NEW_UPPER_BICUTAN', 'NORTH_DAANG_HARI', 'NORTH_SIGNAL_VILLAGE', 'PAG-ASA', 
+            'PAMAYANANG_DIEGO_SILANG', 'PINAGSAMA', 'SAN_MIGUEL', 'SANTA_ANA', 'SOUTH_DAANG_HARI', 
+            'SOUTH_SIGNAL_VILLAGE', 'TANYAG', 'UPPER_BICUTAN', 'WAWA', 'WESTERN_BICUTAN', 
+            'COMEMBO', 'EASTERN_BICUTAN', 'PEMEMBO', 'PITOGO', 'POST_PROPER_NORTHSIDE', 
+            'POST_PROPER_SOUTHSIDE', 'RIZAL', 'SOUTH_CEMBO', 'WEST_REMBO'
+        ];
+        $getAllCategory = Category::getAllCategories();
+        $getAllDance = Dance::getAllDances();
 
-    /**
-     * Update the specified resource in storage.
-     */
+        return view('contestant.edit', compact(
+            'contestant', 
+            'barangays',
+            'getAllCategory',
+            'getAllDance',
+        ));
+    }
+    
     public function update(UpdateContestantRequest $request, Contestant $contestant)
     {
-        //
-    }
+        $validated = $request->validated();
+        $validated['updated_by'] = auth()->id();
 
-    /**
-     * Remove the specified resource from storage.
-     */
+        try 
+        {
+            $contestant->update($validated);
+
+            return redirect()->route('admin.contestant.edit', $contestant)
+                             ->with('success', 'contestant updated successfully!');
+        } 
+        catch (\Exception $e) 
+        {
+            Log::error('Failed to update contestant', ['error' => $e->getMessage()]);
+            
+            return redirect()->route('admin.contestant.edit', $contestant)
+                             ->with('error', 'Failed to update contestant. Please try again.');
+        }
+    }
+    
     public function destroy(Contestant $contestant)
     {
-        //
+        try
+        {
+            $contestant->delete();
+        
+            return redirect()->route('admin.contestant.index')
+                             ->with('success', 'contestant deleted successfully!');
+        }
+        catch (\Exception $e)
+        {
+            Log::error('Failed to delete contestant', ['error' => $e->getMessage()]);
+            
+            return redirect()->route('admin.contestant.index')
+                             ->with('error', 'Failed to delete contestant. Please try again.');
+        }
     }
 }
