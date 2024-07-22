@@ -41,9 +41,10 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto mx-3">
+                        <a href="{{ route('admin.home') }}" class="nav-link">Home</a>
                         <a href="{{ route('admin.contestant.index') }}" class="nav-link">Contestant</a>
                         <a href="" class="nav-link">Criteria</a>
-                        <a href="" class="nav-link">Dance</a>
+                        <a href="{{ route('admin.dance.index') }}" class="nav-link">Dance</a>
                         <a href="{{ route('admin.category.index') }}" class="nav-link">Category</a>
                     </ul>
 

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContestantController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DanceController;
 use App\Http\Controllers\UnauthorizedController;
 use App\Http\Middleware\Admin;
 use App\Http\Middleware\User;
@@ -23,6 +24,7 @@ Route::middleware(['auth', Admin::class])->group(function ()
         Route::get('/home', [HomeController::class, 'index'])->name('home');
         Route::resource('/contestant', ContestantController::class);
         Route::resource('/category', CategoryController::class);
+        Route::resource('/dance', DanceController::class);
     });
 });
 
