@@ -2,7 +2,7 @@
 
 namespace App\DataTables;
 
-use App\Models\global;
+use App\Models\All;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -12,7 +12,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class globalDataTable extends DataTable
+class AllDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
@@ -22,14 +22,14 @@ class globalDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'global.action')
+            ->addColumn('action', 'all.action')
             ->setRowId('id');
     }
 
     /**
      * Get the query source of dataTable.
      */
-    public function query(global $model): QueryBuilder
+    public function query(All $model): QueryBuilder
     {
         return $model->newQuery();
     }
@@ -40,7 +40,7 @@ class globalDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-                    ->setTableId('global-table')
+                    ->setTableId('all-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     //->dom('Bfrtip')
@@ -79,6 +79,6 @@ class globalDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'global_' . date('YmdHis');
+        return 'All_' . date('YmdHis');
     }
 }
