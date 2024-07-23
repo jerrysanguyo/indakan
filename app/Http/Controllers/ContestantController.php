@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Contestant;
 use App\Models\Category;
 use App\Models\Dance;
+use App\Models\Score;
 use App\Http\Requests\StoreContestantRequest;
 use App\Http\Requests\UpdateContestantRequest;
 use App\DataTables\AllDataTable;
@@ -61,6 +62,47 @@ class ContestantController extends Controller
     public function show(Contestant $contestant)
     {
         return view('contestant.show', compact('contestant'));
+    }
+
+    public function getContestantScores($id)
+    {
+        $criteriaScores = $this->calculateAverageScores($id);
+        return response()->json($criteriaScores);
+    }
+
+    private function calculateAverageScores($contestantId)
+    {
+        $scores = Score::where('contestant_id', $contestantId)->get();
+        $criteriaScores = [];
+        $overallScore = 0;
+        $criteriaWeights = [
+            1 => 0.4,
+            2 => 0.3,
+            3 => 0.2,
+            4 => 0.1
+        ];
+
+        foreach ($scores as $score) {
+            if (!isset($criteriaScores[$score->criteria_id])) {
+                $criteriaScores[$score->criteria_id] = [
+                    'total' => 0,
+                    'count' => 0
+                ];
+            }
+
+            $criteriaScores[$score->criteria_id]['total'] += $score->score;
+            $criteriaScores[$score->criteria_id]['count'] += 1;
+        }
+
+        foreach ($criteriaScores as $criteriaId => $criteriaScore) {
+            $criteriaScores[$criteriaId]['average'] = $criteriaScore['total'] / $criteriaScore['count'];
+            $criteriaScores[$criteriaId]['weighted'] = $criteriaScores[$criteriaId]['average'] * $criteriaWeights[$criteriaId];
+            $overallScore += $criteriaScores[$criteriaId]['weighted'];
+        }
+
+        $criteriaScores['overall'] = $overallScore;
+
+        return $criteriaScores;
     }
     
     public function edit(Contestant $contestant)

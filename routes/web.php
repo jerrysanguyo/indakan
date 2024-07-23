@@ -30,6 +30,7 @@ Route::middleware(['auth', Admin::class])->group(function ()
         Route::resource('/criteria', CriteriaController::class);
         Route::resource('/score', ScoreController::class);
         Route::get('/scores/{contestant}', [ScoreController::class, 'vote'])->name('score.vote');
+        Route::get('/contestant-scores/{id}', [ContestantController::class, 'getContestantScores'])->name('contestant.scores');
     });
 });
 
