@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.auth.login')
 
 @section('content')
 <div class="container">
@@ -6,7 +6,7 @@
         <div class="col-md-12">
             <div class="d-flex justify-content-between mb-1">
                 <span class="fs-3">Scores of {{ $contestant->name }}:</span>
-                <a href="{{ route('admin.contestant.index') }}" class="text-decoration-none">
+                <a href="{{ route('admin.home') }}" class="text-decoration-none">
                     <button class="btn btn-primary">
                         Back
                     </button>

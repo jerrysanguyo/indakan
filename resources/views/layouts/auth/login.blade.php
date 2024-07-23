@@ -6,6 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name', 'Laravel') }}</title>
     <link rel="dns-prefetch" href="//fonts.bunny.net">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
     <link rel="icon" type="image/webp" href="{{ asset('image/logo.webp') }}">
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
@@ -31,5 +32,6 @@
             @yield('content')
         </main>
     </div>
+    @stack('scripts')
 </body>
 </html>
