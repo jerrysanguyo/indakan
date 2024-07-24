@@ -17,7 +17,7 @@ class StoreScoreRequest extends FormRequest
             'contestant_id' => 'integer|exists:contestants,id',
             'criteria_id'   => 'integer|exists:criterias,id',
             'scored_by'     => 'integer|exists:users,id',
-            'score'         => 'integer|required|max:100',
+            'score'         => 'integer|required|min:70|max:100',
             'updated_by'    => 'integer|exists:users,id',
         ];
     }

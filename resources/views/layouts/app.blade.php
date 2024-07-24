@@ -41,11 +41,23 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto mx-3">
-                        <a href="{{ route('admin.home') }}" class="nav-link">Home</a>
-                        <a href="{{ route('admin.contestant.index') }}" class="nav-link">Contestant</a>
-                        <a href="{{ route('admin.criteria.index') }}" class="nav-link">Criteria</a>
-                        <a href="{{ route('admin.dance.index') }}" class="nav-link">Dance</a>
-                        <a href="{{ route('admin.category.index') }}" class="nav-link">Category</a>
+                        @switch(Auth::user()->type)
+                            @case('user')
+                                <a href="{{ route('user.home') }}" class="nav-link">Home</a>
+                                @break
+
+                            @case('judge')
+                                <a href="{{ route('judge.home') }}" class="nav-link">Home</a>
+                                @break
+
+                            @case('admin')
+                                <a href="{{ route('admin.home') }}" class="nav-link">Home</a>
+                                <a href="{{ route('admin.contestant.index') }}" class="nav-link">Contestant</a>
+                                <a href="{{ route('admin.criteria.index') }}" class="nav-link">Criteria</a>
+                                <a href="{{ route('admin.dance.index') }}" class="nav-link">Dance</a>
+                                <a href="{{ route('admin.category.index') }}" class="nav-link">Category</a>
+                                @break
+                        @endswitch
                     </ul>
 
                     <!-- Right Side Of Navbar -->

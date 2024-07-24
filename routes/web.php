@@ -10,6 +10,7 @@ use App\Http\Controllers\ScoreController;
 use App\Http\Controllers\UnauthorizedController;
 use App\Http\Middleware\Admin;
 use App\Http\Middleware\User;
+use App\Http\Middleware\Judge;
 
 Route::get('/', function () {
     return view('welcome');
@@ -39,6 +40,20 @@ Route::middleware(['auth', User::class])->group(function ()
     Route::prefix('user')->name('user.')->group(function() 
     {
         Route::get('/home', [HomeController::class, 'index'])->name('home');
+        Route::resource('contestant', ContestantController::class)->only(['show']);
+        Route::get('/contestant-scores/{id}', [ContestantController::class, 'getContestantScores'])->name('contestant.scores');
+    });
+});
+
+Route::middleware(['auth', Judge::class])->group(function ()
+{
+    Route::prefix('judge')->name('judge.')->group(function() 
+    {
+        Route::get('/home', [HomeController::class, 'index'])->name('home');
+        Route::resource('/score', ScoreController::class);
+        Route::resource('contestant', ContestantController::class)->only(['show']);
+        Route::get('/scores/{contestant}', [ScoreController::class, 'vote'])->name('score.vote');
+        Route::get('/contestant-scores/{id}', [ContestantController::class, 'getContestantScores'])->name('contestant.scores');
     });
 });
 

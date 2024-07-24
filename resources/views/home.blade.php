@@ -53,8 +53,15 @@
                                             Action
                                         </button>
                                         <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="{{ route('admin.contestant.show', ['contestant' => $contestant->id]) }}">Details</a></li>
-                                            <li><a class="dropdown-item" href="{{ route('admin.score.vote', ['contestant' => $contestant->id]) }}">Vote</a></li>
+                                            @if(Auth::user()->type === 'user')
+                                                <li><a class="dropdown-item" href="{{ route('user.contestant.show', ['contestant' => $contestant->id]) }}">Details</a></li>
+                                                @elseif(Auth::user()->type === 'admin')
+                                                    <li><a class="dropdown-item" href="{{ route('admin.score.vote', ['contestant' => $contestant->id]) }}">Score</a></li>
+                                                    <li><a class="dropdown-item" href="{{ route('admin.contestant.show', ['contestant' => $contestant->id]) }}">Details</a></li>
+                                                @else
+                                                    <li><a class="dropdown-item" href="{{ route('judge.score.vote', ['contestant' => $contestant->id]) }}">Score</a></li>
+                                                    <li><a class="dropdown-item" href="{{ route('judge.contestant.show', ['contestant' => $contestant->id]) }}">Details</a></li>
+                                            @endif
                                         </ul>
                                     </div>
                                 </td>

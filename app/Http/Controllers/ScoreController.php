@@ -26,16 +26,6 @@ class ScoreController extends Controller
             'existingScores'
         ));
     }
-
-    public function index()
-    {
-        //
-    }
-    
-    public function create()
-    {
-        //
-    }
     
     public function store(StoreScoreRequest $request)
     {
@@ -48,36 +38,18 @@ class ScoreController extends Controller
             Score::create($validated);
 
             $contestantId = $validated['contestant_id'];
-            return redirect()->route('admin.score.vote', $contestantId)
-                             ->with('success', 'score added successfully!');
+
+            $route = auth()->user()->type === 'judge' ? 'judge.score.vote' : 'admin.score.vote';
+            return redirect()->route($route, $contestantId)->with('success', 'Score added successfully!');
         } 
         catch (\Exception $e) 
         {
             Log::error('Failed to store score', ['error' => $e->getMessage()]);
             
             $contestantId = $validated['contestant_id'];
-            return redirect()->route('admin.score.vote', $contestantId)
-                             ->with('error', 'Failed to add score. Please try again.');
-        }
-    }
-    
-    public function show(Score $score)
-    {
-        //
-    }
-    
-    public function edit(Score $score)
-    {
-        //
-    }
-    
-    public function update(UpdateScoreRequest $request, Score $score)
-    {
-        //
-    }
 
-    public function destroy(Score $score)
-    {
-        //
+            $route = auth()->user()->type === 'judge' ? 'judge.score.vote' : 'admin.score.vote';
+            return redirect()->route($route, $contestantId)->with('error', 'Failed to add score. Please try again.');
+        }
     }
 }

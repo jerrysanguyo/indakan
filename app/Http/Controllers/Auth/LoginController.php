@@ -15,8 +15,8 @@ class LoginController extends Controller
             return '/admin/home';
         } else if (auth()->user()->type == 'user') {
             return '/user/home';
-        } else if (auth()->user()->type == 'superadmin') {
-            return '/superadmin/home';
+        } else if (auth()->user()->type == 'judge') {
+            return '/judge/home';
         }
     }
 

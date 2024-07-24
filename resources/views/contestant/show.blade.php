@@ -5,8 +5,14 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="d-flex justify-content-between mb-1">
-                <span class="fs-3">Scores of {{ $contestant->name }}:</span>
-                <a href="{{ route('admin.home') }}" class="text-decoration-none">
+                <span class="fs-3">Scores of {{ $contestant->barangay }}:</span>
+                    @if(Auth::user()->type === 'user')
+                        <a href="{{ route('user.home') }}" class="text-decoration-none">
+                        @elseif(Auth::user()->type === 'admin')
+                        <a href="{{ route('admin.home') }}" class="text-decoration-none">
+                        @else
+                        <a href="{{ route('judge.home') }}" class="text-decoration-none">
+                    @endif
                     <button class="btn btn-primary">
                         Back
                     </button>
@@ -73,10 +79,20 @@
     <script>
         $(document).ready(function() {
             const contestantId = {{ $contestant->id }};
-            
+            const userType = '{{ Auth::user()->type }}';
+            let url;
+
+            if (userType === 'user') {
+                url = `/user/contestant-scores/${contestantId}`;
+            } else if (userType === 'judge') {
+                url = `/judge/contestant-scores/${contestantId}`;
+            } else {
+                url = `/admin/contestant-scores/${contestantId}`;
+            }
+
             function fetchScores() {
                 $.ajax({
-                    url: `/admin/contestant-scores/${contestantId}`,
+                    url: url,
                     type: 'GET',
                     success: function(data) {
                         $('#criteria-1').text(data[1]?.average ? data[1].average.toFixed(2) : 'N/A');
@@ -92,7 +108,7 @@
             }
 
             fetchScores();
-            setInterval(fetchScores, 1000); // Update every 10 seconds
+            setInterval(fetchScores, 1000); // Update every 1 seconds
         });
     </script>
 @endpush
