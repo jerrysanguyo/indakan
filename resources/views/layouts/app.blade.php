@@ -56,6 +56,7 @@
                                 <a href="{{ route('admin.criteria.index') }}" class="nav-link">Criteria</a>
                                 <a href="{{ route('admin.dance.index') }}" class="nav-link">Dance</a>
                                 <a href="{{ route('admin.category.index') }}" class="nav-link">Category</a>
+                                <a href="{{ route('admin.account.index') }}" class="nav-link">Account</a>
                                 @break
                         @endswitch
                     </ul>

@@ -8,6 +8,7 @@ use App\Http\Controllers\DanceController;
 use App\Http\Controllers\CriteriaController;
 use App\Http\Controllers\ScoreController;
 use App\Http\Controllers\UnauthorizedController;
+use App\Http\Controllers\AccountController;
 use App\Http\Middleware\Admin;
 use App\Http\Middleware\User;
 use App\Http\Middleware\Judge;
@@ -30,6 +31,7 @@ Route::middleware(['auth', Admin::class])->group(function ()
         Route::resource('/dance', DanceController::class);
         Route::resource('/criteria', CriteriaController::class);
         Route::resource('/score', ScoreController::class);
+        Route::resource('account', AccountController::class);
         Route::get('/scores/{contestant}', [ScoreController::class, 'vote'])->name('score.vote');
         Route::get('/contestant-scores/{id}', [ContestantController::class, 'getContestantScores'])->name('contestant.scores');
     });
