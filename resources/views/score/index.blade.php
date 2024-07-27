@@ -63,7 +63,7 @@
                                         <input type="number" name="contestant_id" id="contestant_id" class="form-control" value="{{ $contestant->id }}" hidden>
                                     </td>
                                     <td>
-                                        <input type="number" name="score" id="score" class="form-control" value="{{ $existingScores[$criteria->id]->score ?? '' }}" {{ isset($existingScores[$criteria->id]) ? 'readonly' : '' }}>
+                                        <input type="number"  step="0.01" name="score" id="score" class="form-control" value="{{ $existingScores[$criteria->id]->score ?? '' }}" {{ isset($existingScores[$criteria->id]) ? 'readonly' : '' }}>
                                     </td>
                                     <td>
                                         @if(!isset($existingScores[$criteria->id]))
