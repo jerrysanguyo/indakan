@@ -15,7 +15,7 @@ class StoreContestantRequest extends FormRequest
     {
         return [
             'name'          => 'required|string|max:255',
-            'barangay'      => 'required|string|max:255',
+            'barangay'      => 'nullable|string|max:255',
             'no_of_members' => 'required|integer',
             'focal_person'  => 'required|string|max:255',
             'folk_dance_id' => 'integer|exists:categories,id',

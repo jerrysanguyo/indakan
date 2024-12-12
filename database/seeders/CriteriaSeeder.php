@@ -11,15 +11,16 @@ class CriteriaSeeder extends Seeder
     public function run(): void
     {
         $criterias = [
-            'A. Overall Performance, Difficulty, artistry of steps, mastery precision.',
-            'B. Choreography, Unique and authenticity, concept, formation.',
-            'C. Theme and Music: Musicality, beat techniques, timing, Synchronization, moves related to the music.',
-            'D. Costumes, props'
+            ['name' => 'A. CHOICE OF SONG', 'percentage' => 30],
+            ['name' => 'B. BLENDING', 'percentage' => 30],
+            ['name' => 'C. Originality of Presentation', 'percentage' => 20],
+            ['name' => 'D. Stage Presence / Audience Impact', 'percentage' => 20]
         ];
-
+    
         foreach ($criterias as $criteria) {
             Criteria::create([
-                'name' => $criteria,
+                'name' => $criteria['name'],
+                'percentage' => $criteria['percentage'],
                 'added_by' => 1,
                 'updated_by' => 1,
             ]);

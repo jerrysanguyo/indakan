@@ -22,7 +22,7 @@ class ContestantController extends Controller
             'PAMAYANANG_DIEGO_SILANG', 'PINAGSAMA', 'SAN_MIGUEL', 'SANTA_ANA', 'SOUTH_DAANG_HARI', 
             'SOUTH_SIGNAL_VILLAGE', 'TANYAG', 'UPPER_BICUTAN', 'WAWA', 'WESTERN_BICUTAN', 
             'COMEMBO', 'EASTERN_BICUTAN', 'PEMEMBO', 'PITOGO', 'POST_PROPER_NORTHSIDE', 
-            'POST_PROPER_SOUTHSIDE', 'RIZAL', 'SOUTH_CEMBO', 'WEST_REMBO'
+            'POST_PROPER_SOUTHSIDE', 'RIZAL', 'SOUTH_CEMBO', 'WEST_REMBO',
         ];
 
         $getAllContestants = Contestant::getAllContestants();

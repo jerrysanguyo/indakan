@@ -15,6 +15,7 @@ class StoreCriteriaRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
+            'percentage'    =>  'required|integer|max:100',
             'added_by' => 'integer|exists:users,id',
             'updated_by' => 'integer|exists:users,id',
         ];

@@ -22,6 +22,13 @@ class Score extends Model
     {
         return self::all();
     }
+    public static function getGroupedScoresByCriteria(int $contestantId)
+    {
+        return self::selectRaw('criteria_id, SUM(score) as total, COUNT(score) as count')
+            ->where('contestant_id', $contestantId)
+            ->groupBy('criteria_id')
+            ->get();
+    }
 
     public function scoredBy()
     {

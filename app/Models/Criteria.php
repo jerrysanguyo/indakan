@@ -12,6 +12,7 @@ class Criteria extends Model
     protected $table='criterias';
     protected $fillable = [
         'name',
+        'percentage',
         'added_by',
         'updated_by',
     ];
@@ -19,6 +20,11 @@ class Criteria extends Model
     public static function getAllCriteria()
     {
         return self::all();
+    }
+    
+    public static function getPercentages()
+    {
+        return self::pluck('percentage', 'id');
     }
 
     public function createdBy() 

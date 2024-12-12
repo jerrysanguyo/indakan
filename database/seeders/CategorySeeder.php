@@ -14,7 +14,8 @@ class CategorySeeder extends Seeder
             'BARRIO DANCES',
             'CORDILLERA',
             'MINDANAO',
-            'SPANISH INFLUENCE'
+            'SPANISH INFLUENCE',
+            'CAROLING'
         ];
 
         foreach ($categories as $category) {

@@ -32,6 +32,7 @@
                         <thead>
                             <tr>
                                 <th>Criteria name</th>
+                                <th>Percentage</th>
                                 <th>Created</th>
                                 <th>Updated</th>
                                 <th>Action</th>
@@ -41,6 +42,7 @@
                             @foreach($listOfCriteria as $criteria)
                             <tr>
                                 <td>{{ $criteria->name }}</td>
+                                <td>{{ $criteria->percentage }}%</td>
                                 <td>{{ $criteria->createdBy->name }}</td>
                                 <td>{{ $criteria->updatedBy->name }}</td>
                                 <td>

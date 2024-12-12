@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
             DanceSeeder::class,
             CriteriaSeeder::class,
             CategorySeeder::class,
-            ContestantSeeder::class,
+            // ContestantSeeder::class,
         ]);
     }
 }

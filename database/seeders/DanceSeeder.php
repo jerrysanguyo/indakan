@@ -37,6 +37,7 @@ class DanceSeeder extends Seeder
             'SPAIN',
             'JOTA CAVITENA',
             'JOTA QUIRINO',
+            'CAROLING'
         ];
 
         foreach ($dances as $dance) {

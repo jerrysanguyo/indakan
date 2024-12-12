@@ -15,6 +15,7 @@
                     <div class="col-lg-12">
                         <label for="barangay" class="form-label">Barangay:</label>
                         <select name="barangay" id="barangay" class="form-select">
+                            <option value="">Choose ...</option>
                             @foreach($barangays as $barangay)
                                 <option value="{{ $barangay }}">{{ $barangay }}</option>
                             @endforeach
@@ -29,16 +30,18 @@
                         <input type="text" name="focal_person" id="focal_person" class="form-control">
                     </div>
                     <div class="col-lg-12">
-                        <label for="folk_dance_id">Focal person:</label>
+                        <label for="folk_dance_id">Category:</label>
                         <select name="folk_dance_id" id="folk_dance_id" class="form-select">
+                            <option value="">Choose ...</option>
                             @foreach($getAllCategory as $category)
                             <option value="{{ $category->id }}">{{ $category->name }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="col-lg-12">
-                        <label for="dance_id">Focal person:</label>
+                        <label for="dance_id">Type:</label>
                         <select name="dance_id" id="dance_id" class="form-select">
+                            <option value="">Choose ...</option>
                             @foreach($getAllDance as $dance)
                             <option value="{{ $dance->id }}">{{ $dance->name }}</option>
                             @endforeach

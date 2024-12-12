@@ -28,11 +28,10 @@
                         <thead>
                             <tr>
                                 <th>Contestant name</th>
-                                <th>Barangay</th>
-                                <th>Criteria #1 (40%)</th>
+                                <th>Criteria #1 (30%)</th>
                                 <th>Criteria #2 (30%)</th>
                                 <th>Criteria #3 (20%)</th>
-                                <th>Criteria #4 (10%)</th>
+                                <th>Criteria #4 (20%)</th>
                                 <th>Overall score</th>
                                 <th>Action</th>
                             </tr>
@@ -41,11 +40,10 @@
                             @foreach($contestantsWithScores as $contestant)
                             <tr>
                                 <td>{{ $contestant->name }}</td>
-                                <td>{{ $contestant->barangay }}</td>
-                                <td>{{ number_format($contestant->criteria_scores[1]['weighted'] ?? 0, 2) }}</td>
-                                <td>{{ number_format($contestant->criteria_scores[2]['weighted'] ?? 0, 2) }}</td>
-                                <td>{{ number_format($contestant->criteria_scores[3]['weighted'] ?? 0, 2) }}</td>
-                                <td>{{ number_format($contestant->criteria_scores[4]['weighted'] ?? 0, 2) }}</td>
+                                <td>{{ number_format($contestant->criteria_scores[1]['total'] ?? 0, 2) }}</td>
+                                <td>{{ number_format($contestant->criteria_scores[2]['total'] ?? 0, 2) }}</td>
+                                <td>{{ number_format($contestant->criteria_scores[3]['total'] ?? 0, 2) }}</td>
+                                <td>{{ number_format($contestant->criteria_scores[4]['total'] ?? 0, 2) }}</td>
                                 <td>{{ number_format($contestant->overall_score, 2) }}</td>
                                 <td>
                                     <div class="dropdown">

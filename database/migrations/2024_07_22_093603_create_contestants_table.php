@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('contestants', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('barangay');
+            $table->string('barangay')->nullable();
             $table->integer('no_of_members');
             $table->string('focal_person');
             $table->foreignId('folk_dance_id')->constrained('categories');

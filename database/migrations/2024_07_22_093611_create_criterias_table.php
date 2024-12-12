@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('criterias', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->integer('percentage');
             $table->foreignId('added_by')->constrained('users');
             $table->foreignId('updated_by')->constrained('users');
             $table->timestamps();
