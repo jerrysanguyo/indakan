@@ -49,42 +49,47 @@
                         </thead>
                         <tbody>
                             @foreach($listOfCriteria as $criteria)
-                                @switch(Auth::user()->type)
-                                    @case('admin')
-                                        <form action="{{ route('admin.score.store') }}" method="post">
-                                    @case('judge')
-                                        <form action="{{ route('judge.score.store') }}" method="post">
-                                @endswitch
-                                @csrf
                                 <tr>
                                     <td>
                                         {{ $criteria->name }}
                                         {{ $criteria->percentage }}%
-                                        <input type="number" name="criteria_id" id="criteria_id" class="form-control" value="{{ $criteria->id }}" hidden>
-                                        <input type="number" name="contestant_id" id="contestant_id" class="form-control" value="{{ $contestant->id }}" hidden>
                                     </td>
                                     <td>
-                                        <input 
-                                            type="number"  
-                                            step="0.01" 
-                                            name="score" 
-                                            id="score" 
-                                            class="form-control" 
-                                            value="{{ $existingScores[$criteria->id]->score ?? '' }}" 
-                                            {{ isset($existingScores[$criteria->id]) ? 'readonly' : '' }} 
-                                            max="{{ $criteria->percentage }}" 
-                                            min="0"
-                                        >
+                                        <form action="{{ isset($existingScores[$criteria->id]) 
+                                                ? (Auth::user()->type === 'admin' 
+                                                    ? route('admin.score.update', ['score' => $existingScores[$criteria->id]->id]) 
+                                                    : route('judge.score.update', ['score' => $existingScores[$criteria->id]->id])) 
+                                                : (Auth::user()->type === 'admin' 
+                                                    ? route('admin.score.store') 
+                                                    : route('judge.score.store')) 
+                                            }}" method="POST">
+                                                @csrf
+                                                @if(isset($existingScores[$criteria->id]))
+                                                    @method('PUT')
+                                                    <input type="hidden" name="score_id" value="{{ $existingScores[$criteria->id]->id }}">
+                                                @endif
+                                            <input type="hidden" name="criteria_id" value="{{ $criteria->id }}">
+                                            <input type="hidden" name="contestant_id" value="{{ $contestant->id }}">
+                                            <input 
+                                                type="number"  
+                                                step="0.01" 
+                                                name="score" 
+                                                id="score" 
+                                                class="form-control" 
+                                                value="{{ $existingScores[$criteria->id]->score ?? '' }}" 
+                                                max="{{ $criteria->percentage }}" 
+                                                min="0"
+                                            >
                                     </td>
                                     <td>
                                         @if(!isset($existingScores[$criteria->id]))
-                                            <input type="submit" value="Submit" class="btn btn-primary">
+                                            <button type="submit" class="btn btn-primary">Submit</button>
                                         @else
-                                            <span class="text-muted">Score already submitted</span>
+                                            <input type="submit" value="Update" class="btn btn-primary">
                                         @endif
+                                        </form>
                                     </td>
                                 </tr>
-                            </form>
                             @endforeach
                         </tbody>
                     </table>
