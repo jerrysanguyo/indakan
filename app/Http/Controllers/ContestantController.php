@@ -75,12 +75,6 @@ class ContestantController extends Controller
         $scores = Score::where('contestant_id', $contestantId)->get();
         $criteriaScores = [];
         $overallScore = 0;
-        $criteriaWeights = [
-            1 => 0.4,
-            2 => 0.3,
-            3 => 0.2,
-            4 => 0.1
-        ];
 
         foreach ($scores as $score) {
             if (!isset($criteriaScores[$score->criteria_id])) {
@@ -96,14 +90,14 @@ class ContestantController extends Controller
 
         foreach ($criteriaScores as $criteriaId => $criteriaScore) {
             $criteriaScores[$criteriaId]['average'] = $criteriaScore['total'] / $criteriaScore['count'];
-            $criteriaScores[$criteriaId]['weighted'] = $criteriaScores[$criteriaId]['average'] * $criteriaWeights[$criteriaId];
-            $overallScore += $criteriaScores[$criteriaId]['weighted'];
+            $overallScore += $criteriaScores[$criteriaId]['average']; // Add the average directly to the overall score
         }
 
-        $criteriaScores['overall'] = $overallScore;
+        $criteriaScores['overall'] = $overallScore; // Sum of criteria 1 to 4
 
         return $criteriaScores;
     }
+
     
     public function edit(Contestant $contestant)
     {

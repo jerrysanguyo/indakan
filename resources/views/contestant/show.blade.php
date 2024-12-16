@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="d-flex justify-content-between mb-1">
-                <span class="fs-3">Scores of {{ $contestant->barangay }}:</span>
+                <span class="fs-3 text-white">Scores of {{ $contestant->barangay }}:</span>
                     @if(Auth::user()->type === 'user')
                         <a href="{{ route('user.home') }}" class="text-decoration-none">
                         @elseif(Auth::user()->type === 'admin')

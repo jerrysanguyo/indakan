@@ -27,6 +27,11 @@
             -o-background-size: cover;
             background-size: cover;
         }
+
+        .fs-3 {
+            color: white;
+        }
+        
     </style>
 </head>
 <body>
