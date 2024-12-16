@@ -11,6 +11,10 @@ export default defineConfig({
             refresh: true,
         }),
     ],
+    build: {
+        outDir: 'public/build', 
+        emptyOutDir: true, 
+    },
     //for localhost
     // server: {
     //     host: '192.168.68.100',

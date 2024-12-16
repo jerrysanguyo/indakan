@@ -11,32 +11,6 @@ class DanceSeeder extends Seeder
     public function run(): void
     {
         $dances = [
-            'ITIK ITIK',
-            'KARATONG',
-            'MAGLALATIK',
-            'MAMUMUGON SA KAMPO',
-            'BULAKLAKAN',
-            'BAMO DANCE',
-            'SUBLI DANCE',
-            'RAGRAGSAKAN',
-            'PATTONG NG KALINGA',
-            'CORDILLERA',
-            'LUMAGEN TACHOK',
-            'IDUDU',
-            'BANGA',
-            'SUGOD UNO (BAGOBO RICE CYCLE)',
-            'MARANAO DANCE-KAKULANGAN',
-            'KAPPA MALONG-MALONG',
-            'MAGIGAL',
-            'MINDANAO',
-            'SUA KU SUA ',
-            'PASO DOBLE',
-            'REGATONES',
-            'PANDANGGO SA ILAW',
-            'LA JOTA MANILEÑA',
-            'SPAIN',
-            'JOTA CAVITENA',
-            'JOTA QUIRINO',
             'CAROLING'
         ];
 

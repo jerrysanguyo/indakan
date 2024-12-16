@@ -11,10 +11,6 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         $categories = [
-            'BARRIO DANCES',
-            'CORDILLERA',
-            'MINDANAO',
-            'SPANISH INFLUENCE',
             'CAROLING'
         ];
 

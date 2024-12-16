@@ -29,14 +29,14 @@
             <div class="position-fixed top-0 end-0 p-3 text-end">
                 @auth
                     @if(Auth::check() && Auth::user()->type === 'admin')
-                        <a href="{{ url('/admin/home') }}" class="fw-bold text-secondary text-decoration-none">Home</a>
+                        <a href="{{ url('/admin/home') }}" class="fw-bold text-white text-decoration-none">Home</a>
                     @elseif(Auth::check() && Auth::user()->type === 'judge')
-                        <a href="{{ url('/judge/home') }}" class="fw-bold text-secondary text-decoration-none">Home</a>
+                        <a href="{{ url('/judge/home') }}" class="fw-bold text-white text-decoration-none">Home</a>
                     @else
-                        <a href="{{ url('/user/home') }}" class="fw-bold text-secondary text-decoration-none">Home</a>
+                        <a href="{{ url('/user/home') }}" class="fw-bold text-white text-decoration-none">Home</a>
                     @endif
                 @else
-                    <a href="{{ route('login') }}" class="fw-bold text-secondary text-decoration-none">Log in</a>
+                    <a href="{{ route('login') }}" class="fw-bold text-white text-decoration-none">Log in</a>
                 @endauth
             </div>
         @endif
